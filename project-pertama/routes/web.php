@@ -16,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/crud/index', 'CrudController@index');
-Route::get('/crud/tambah', 'CrudController@tambah');
+Route::get('/crud/index', 'CrudController@index')->name('crud');
+Route::get('/crud/tambah', 'CrudController@tambah')->name('crud.tambah');
+Route::post('/crud/simpan', 'CrudController@simpan')->name('crud.simpan');

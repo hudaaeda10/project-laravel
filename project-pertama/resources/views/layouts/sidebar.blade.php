@@ -25,7 +25,7 @@
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                 </ul>
             </li>
-            <li class="active"><a class="nav-link" href="/crud/index"><i class="far fa-square"></i>
+            <li class="active"><a class="nav-link" href="{{ route('crud') }}"><i class="far fa-square"></i>
                     <span>CRUD</span></a></li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
