@@ -10,6 +10,16 @@
                 <a href="{{ route('crud.tambah') }}" class="btn btn-icon icon-left btn-primary">
                     <i class="far fa-edit"></i> Tambah Data</a>
                 <hr>
+                @if (session('message'))
+                    <div class="alert alert-success alert-dismissible show fade">
+                        <div class="alert-body">
+                            <button class="close" data-dismiss="alert">
+                                <span>×</span>
+                            </button>
+                            {{ session('message') }}
+                        </div>
+                    </div>
+                @endif
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -26,9 +36,9 @@
                                 <td>{{ $data->kode_barang }}</td>
                                 <td>{{ $data->nama_barang }}</td>
                                 <td>
-                                    <a href="#" class="badge badge-warning">Edit </a>
+                                    <a href="{{ route('crud.edit', $data->id) }}" class="badge badge-warning">Edit </a>
                                     <a href="{{ route('crud.delete', $data->id) }}" class="badge badge-danger"
-                                        onclick="return confirm('Are you sure you want to delete?')">
+                                        onclick="return confirm('Yakin ingin dihapus?')">
                                         Delete
                                     </a>
                                 </td>

@@ -20,3 +20,5 @@ Route::get('/crud/index', 'CrudController@index')->name('crud');
 Route::get('/crud/tambah', 'CrudController@tambah')->name('crud.tambah');
 Route::post('/crud/simpan', 'CrudController@simpan')->name('crud.simpan');
 Route::get('/crud/delete/{id}', 'CrudController@delete')->name('crud.delete');
+Route::get('/crud/{id}/edit', 'CrudController@edit')->name('crud.edit');
+Route::patch('/crud/{id}', 'CrudController@update')->name('crud.update');
