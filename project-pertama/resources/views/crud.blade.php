@@ -3,6 +3,7 @@
 @section('content')
     <div class="section-body">
         <div class="row">
+            @include('sweetalert::alert')
             <div class="col-12 col-md-12 col-lg-12">
                 Halaman Crud
                 <br>
@@ -21,18 +22,30 @@
                     <tbody>
                         @foreach ($data_barang as $no => $data)
                             <tr>
-                                <th scope="row">{{ $no + 1 }}</th>
+                                <th scope="row">{{ $data_barang->firstItem() + $no }}</th>
                                 <td>{{ $data->kode_barang }}</td>
                                 <td>{{ $data->nama_barang }}</td>
                                 <td>
                                     <a href="#" class="badge badge-warning">Edit </a>
-                                    <a href="#" class="badge badge-danger">Delete</a>
+                                    <a href="{{ route('crud.delete', $data->id) }}" class="badge badge-danger"
+                                        onclick="return confirm('Are you sure you want to delete?')">
+                                        Delete
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                {{ $data_barang->links() }}
             </div>
         </div>
     </div>
+@endsection
+
+@section('page-scripts')
+
+@endsection
+
+@section('after-scripts')
+
 @endsection

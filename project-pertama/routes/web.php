@@ -19,3 +19,4 @@ Route::get('/', function () {
 Route::get('/crud/index', 'CrudController@index')->name('crud');
 Route::get('/crud/tambah', 'CrudController@tambah')->name('crud.tambah');
 Route::post('/crud/simpan', 'CrudController@simpan')->name('crud.simpan');
+Route::get('/crud/delete/{id}', 'CrudController@delete')->name('crud.delete');

@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Alert;
 
 class CrudController extends Controller
 {
     // halaman utama crud
     public function index()
     {
-        $data_barang = DB::table('data_barang')->get();
+        $data_barang = DB::table('data_barang')->paginate(10);
         return view('crud', ['data_barang' => $data_barang]);
     }
 
@@ -36,9 +37,13 @@ class CrudController extends Controller
         return redirect()->route('crud');
     }
 
-
-
     // edit data
 
     // hapus data
+    public function delete($id)
+    {
+        DB::table('data_barang')->where('id', $id)->delete();
+        Alert::success('Terhapus', 'Data Berhasil Dihapus');
+        return redirect()->back();
+    }
 }
