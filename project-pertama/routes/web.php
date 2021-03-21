@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/crud/index', 'CrudController@index');
+Route::get('/crud/tambah', 'CrudController@tambah');
