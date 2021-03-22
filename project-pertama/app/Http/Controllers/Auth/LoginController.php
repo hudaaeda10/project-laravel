@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME`;
     protected $redirectTo = RouteServiceProvider::DASHBOARD;
 
     /**
@@ -37,5 +37,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        return view('otentikasi.login');
+    }
+
+    public function username()
+    {
+        return 'username';
     }
 }
