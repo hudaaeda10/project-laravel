@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', 'otentikasi\OtentikasiController@index')->name('login');
+Route::post('/', 'otentikasi\OtentikasiController@login')->name('login');
+
+Route::group(['middleware' => 'CekLoginMiddleware'], function () {
+    Route::get('/dashboard', function () {
+        return view('index');
+    });
+    Route::get('/crud/index', 'CrudController@index')->name('crud');
+    Route::get('/crud/tambah', 'CrudController@tambah')->name('crud.tambah');
+    Route::post('/crud/simpan', 'CrudController@simpan')->name('crud.simpan');
+    Route::get('/crud/delete/{id}', 'CrudController@delete')->name('crud.delete');
+    Route::get('/crud/{id}/edit', 'CrudController@edit')->name('crud.edit');
+    Route::patch('/crud/{id}', 'CrudController@update')->name('crud.update');
+    Route::get('/logout', 'otentikasi\OtentikasiController@logout')->name('logout');
 });
-Route::get('/crud/index', 'CrudController@index')->name('crud');
-Route::get('/crud/tambah', 'CrudController@tambah')->name('crud.tambah');
-Route::post('/crud/simpan', 'CrudController@simpan')->name('crud.simpan');
-Route::get('/crud/delete/{id}', 'CrudController@delete')->name('crud.delete');
-Route::get('/crud/{id}/edit', 'CrudController@edit')->name('crud.edit');
-Route::patch('/crud/{id}', 'CrudController@update')->name('crud.update');
