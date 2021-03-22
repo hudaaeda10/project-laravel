@@ -8,21 +8,14 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-                    <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
-                </ul>
-            </li>
+            <li class="@if (Request::segment(1) == 'dashboard') active @endif""><a class="nav-link" href="{{ url('dashboard') }}"><i class="far fa-square"></i>
+                <span>Dashboard</span></a></li>
             <li class="menu-header">Menu</li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown @if (Request::segment(1) == 'konfigurasi' and Request::segment(2) == 'setup') active @endif">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Konfigurasi Aplikasi</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ route('setup.index') }}">Setup Aplikasi</a></li>
-                    <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+                    <li class="@if (Request::segment(1) == 'konfigurasi' and Request::segment(2) == 'setup') active @endif"><a class="nav-link" href="{{ route('setup.index') }}">Setup Aplikasi</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -34,7 +27,7 @@
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                 </ul>
             </li>
-            <li class="active"><a class="nav-link" href="{{ route('crud') }}"><i class="far fa-square"></i>
+            <li class="@if (Request::segment(1) == 'crud' and Request::segment(2) == 'index') active @endif"><a class="nav-link" href="{{ route('crud') }}"><i class="far fa-square"></i>
                     <span>CRUD</span></a></li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
