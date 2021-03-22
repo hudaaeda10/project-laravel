@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Konfigurasi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Setup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,8 +16,8 @@ class SetupController extends Controller
      */
     public function index()
     {
-        $data_barang = DB::table('data_barang')->paginate(10);
-        return view('konfigurasi/setup', ['data_barang' => $data_barang]);
+        $setup = Setup::get();
+        return view('konfigurasi/setup', ['setup' => $setup]);
     }
 
     /**
@@ -37,7 +38,8 @@ class SetupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Setup::create($request->all());
+        return redirect()->back()->with('message', 'Data Berhasil di input');
     }
 
     /**

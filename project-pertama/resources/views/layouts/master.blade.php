@@ -43,6 +43,7 @@
 
                     @yield('content')
                 </section>
+                @yield('modal')
             </div>
             <footer class="main-footer">
                 <div class="footer-left">
