@@ -15,12 +15,21 @@
                     <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
                 </ul>
             </li>
-            <li class="menu-header">Starter</li>
+            <li class="menu-header">Menu</li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                    <span>Layout</span></a>
+                    <span>Konfigurasi Aplikasi</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
+                    <li><a class="nav-link" href="{{ route('setup.index') }}">Setup Aplikasi</a></li>
+                    <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
+                    <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                    <span>Masterdata</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="layout-default.html">Master</a></li>
                     <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                 </ul>

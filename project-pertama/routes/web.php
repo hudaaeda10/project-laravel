@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/crud/{id}/edit', 'CrudController@edit')->name('crud.edit');
     Route::patch('/crud/{id}', 'CrudController@update')->name('crud.update');
     Route::get('/logout', 'otentikasi\OtentikasiController@logout')->name('logout');
+
+    Route::resource('/konfigurasi/setup', 'Konfigurasi\SetupController');
 });
 
 
