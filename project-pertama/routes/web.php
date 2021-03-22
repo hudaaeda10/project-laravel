@@ -13,8 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/', 'otentikasi\OtentikasiController@login')->name('login');
-Route::get('/', 'otentikasi\OtentikasiController@index')->name('login');
+Route::get('/', function () {
+    return view('welcome');
+});
+// Route::post('/', 'otentikasi\OtentikasiController@login')->name('login');
+// Route::get('/', 'otentikasi\OtentikasiController@index')->name('login');
+Auth::routes();
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/', 'Auth\LoginController@login')->name('login');
 
 // Route::group(['middleware' => 'CekLoginMiddleware'], function () {
 Route::group(['middleware' => 'auth'], function () {
@@ -29,3 +35,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/crud/{id}', 'CrudController@update')->name('crud.update');
     Route::get('/logout', 'otentikasi\OtentikasiController@logout')->name('logout');
 });
+
+
+Route::get('/home', 'HomeController@index')->name('home');

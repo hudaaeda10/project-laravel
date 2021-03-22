@@ -25,17 +25,17 @@ class OtentikasiController extends Controller
         //         return redirect('/dashboard');
         //     }
         // }
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            Alert::success('Login', 'Anda Berhasil Login');
-            return redirect('/dashboard');
-        }
-        return redirect('/')->with('message', 'Email atau Password anda salah');
+        // if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        //     Alert::success('Login', 'Anda Berhasil Login');
+        //     return redirect('/dashboard');
+        // }
+        // return redirect('/')->with('message', 'Email atau Password anda salah');
     }
 
     public function logout(Request $request)
     {
         // $request->session()->flush();
-        Auth::logout();
-        return redirect('/')->with('message', 'Anda telah logout');
+        // Auth::logout();
+        // return redirect('/')->with('message', 'Anda telah logout');
     }
 }
