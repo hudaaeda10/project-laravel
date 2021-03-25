@@ -59,9 +59,9 @@ class SetupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Setup $setup)
     {
-        //
+        echo json_encode(Setup::find($_POST['id'])->first());
     }
 
     /**
@@ -85,5 +85,9 @@ class SetupController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getUbah()
+    {
     }
 }
