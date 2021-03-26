@@ -38,8 +38,28 @@ class SetupController extends Controller
      */
     public function store(Request $request)
     {
+        $this->_validation($request);
         Setup::create($request->all());
         return redirect()->back()->with('message', 'Data Berhasil di input');
+    }
+
+    // function _validation
+    private function _validation(Request $request)
+    {
+        $validation = $request->validate(
+            [
+                'nama_aplikasi' => 'required|min:3|max:10',
+                'jumlah_hari_kerja' => 'required|min:2|max:100'
+            ],
+            [
+                'nama_aplikasi.required' => 'Field harus diisi',
+                'nama_aplikasi.min' => 'Minimal diisi 3 digit',
+                'nama_aplikasi.max' => 'Field diisi maksimal 100 digit',
+                'jumlah_hari_kerja.required' => 'Field harus diisi',
+                'jumlah_hari_kerja.min' => 'Minimal diisi 2 digit',
+                'jumlah_hari_kerja.max' => 'Field diisi maksimal 3 digit'
+            ]
+        );
     }
 
     /**
@@ -61,7 +81,8 @@ class SetupController extends Controller
      */
     public function edit(Setup $setup)
     {
-        echo json_encode(Setup::find($_POST['id'])->first());
+        // $setup = Setup::find($id);
+        return view('konfigurasi.setup-edit', compact('setup'));
     }
 
     /**
@@ -73,7 +94,7 @@ class SetupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Setup::where('id', $id)->update(['nama_aplikasi' => $request->nama_aplikasi, 'jumlah_hari_kerja' => $request->jumlah_hari_kerja]);
     }
 
     /**

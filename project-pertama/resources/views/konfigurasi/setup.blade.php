@@ -29,14 +29,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($setup as $data)
-                        <?php $no=1; ?>
+                        @foreach ($setup as $no => $data)
                             <tr>
-                                <th scope="row">{{ $no++ }}</th>
+                                <th scope="row">{{ $no+1 }}</th>
                                 <td>{{ $data->jumlah_hari_kerja }}</td>
                                 <td>{{ $data->nama_aplikasi }}</td>
                                 <td>
-                                    <a href="#" class="badge badge-warning btn-edit tampilModalEdit" data-toggle="modal" data-target="#exampleModal" data-id="{{ $data->id }}" >Edit </a>
+                                    <a href="#" class="badge badge-warning btn-edit" data-id="{{ $data->id }}" >Edit </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -57,20 +56,19 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <div class="modal-body">
-                <form action="{{ route('setup.store') }}" method="POST">
-                        @csrf
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="hidden" name="id" id="id">
-                                    <div class="form-group">
-                                        <label @error('nama_aplikasi') class="text-danger" @enderror>Nama Aplikasi
-                                            @error('nama_aplikasi')
-                                                | {{ $message }}
-                                            @enderror</label>
-                                        <input type="text" class="form-control" name="nama_aplikasi" id="nama_aplikasi"
-                                            value="{{ old('nama_aplikasi') }}">
-                                    </div>
+            <form action="{{ route('setup.store') }}" method="POST">
+                    @csrf
+                <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label @error('nama_aplikasi') class="text-danger" @enderror>Nama Aplikasi
+                                        @error('nama_aplikasi')
+                                            | {{ $message }}
+                                        @enderror</label>
+                                    <input type="text" class="form-control" name="nama_aplikasi" id="nama_aplikasi"
+                                        value="{{ old('nama_aplikasi') }}">
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -82,11 +80,34 @@
                                         value="{{ old('jumlah_hari_kerja') }}">
                                 </div>
                             </div>
+                        </div>
                     </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-edit">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="formModalLabel">Tambah Setup Aplikasi</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <form action="{{ route('setup.store') }}" method="POST" id="form-edit">
+                    @csrf
+                <div class="modal-body">
+                        
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-primary btn-update">Simpan</button>
                 </div>
             </form>
         </div>
@@ -101,25 +122,47 @@
 
 @push('after-scripts')
     <script>
-        $(function() {
-            $('.tampilModalEdit').on('click', function() {
-                const id = $(this).data('id');
-                $('#formModalLabel').html('Ubah Setup Aplikasi');
-                $('.modal-body form').attr('action', `/konfigurasi/setup/${id}`);
-                $('.modal-footer button[type=submit]').html('Ubah Data');
 
-                $.ajax({
-                    url: `konfigurasi/setup/${id}/edit`,
-                    data: {id : id},
-                    method: 'POST',
-                    dataType: 'json',
-                    success: function(data) {
-                        $('#nama_aplikasi').val(data.nama_aplikasi);
-                        $('#jumlah_hari_kerja').val(data.jumlah_hari_kerja);
-                        $('#id').val(data.id);
-                    }
-                })
-            })
-        })
-    </script>    
+        @if($errors->any())
+            $('#exampleModal').modal('show');
+        @endif
+        $('.btn-edit').on('click',function(){
+            // console.log($(this).data('id'));
+            let id = $(this).data('id')
+            $.ajax({
+                url: `/konfigurasi/setup/${id}/edit`,
+                method: "GET",
+                success: function(data) {
+                    // console.log(data);
+                    $('#modal-edit').find('.modal-body').html(data);
+                    $('#modal-edit').modal('show');
+                },
+                error:function(error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('.btn-update').on('click',function(){
+            // console.log($(this).data('id'));
+            let id = $('#form-edit').find('#id_data').val();
+            let formData = $('#form-edit').serialize();
+            console.log(formData);
+            // console.log(id);
+            $.ajax({
+                url: `/konfigurasi/setup/${id}`,
+                method: "PATCH",
+                data: formData,
+                success: function(data) {
+                    // console.log(data);
+                    // $('#modal-edit').find('.modal-body').html(data);
+                    $('#modal-edit').modal('hide');
+                    window.location.assign('/konfigurasi/setup');
+                },
+                error:function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
 @endpush
