@@ -159,8 +159,21 @@
                     $('#modal-edit').modal('hide');
                     window.location.assign('/konfigurasi/setup');
                 },
-                error:function(error) {
-                    console.log(error);
+                error:function(err) {
+                    console.log(err.responseJSON);
+                    err_log = err.responseJSON.errors;
+                    if (err.status == 422) {
+                        if (typeof(err_log.nama_aplikasi) !== 'undefined'){
+                            $('#modal-edit').find('[name="nama_aplikasi"]').prev().html('<span style="color:red"> Nama Aplikasi | '+ err_log.nama_aplikasi[0] +'</span>');
+                        } else {
+                            $('#modal-edit').find('[name="nama_aplikasi"]').prev().html('<span> Nama Aplikasi </span>');
+                        }
+                    }
+                    if (typeof(err_log.jumlah_hari_kerja) !== 'undefined') {
+                        $('#modal-edit').find('[name="jumlah_hari_kerja"]').prev().html('<span style="color:red"> Jumlah Hari Kerja | '+ err_log.jumlah_hari_kerja[0] +'</span>');
+                    }else {
+                        $('#modal-edit').find('[name="jumlah_hari_kerja"]').prev().html('<span> Jumlah Hari Kerja </span>');
+                    }
                 }
             });
         });

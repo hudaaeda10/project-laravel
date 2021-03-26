@@ -49,15 +49,16 @@ class SetupController extends Controller
         $validation = $request->validate(
             [
                 'nama_aplikasi' => 'required|min:3|max:10',
-                'jumlah_hari_kerja' => 'required|min:2|max:100'
+                'jumlah_hari_kerja' => 'required|min:2|max:31|numeric'
             ],
             [
                 'nama_aplikasi.required' => 'Field harus diisi',
                 'nama_aplikasi.min' => 'Minimal diisi 3 digit',
                 'nama_aplikasi.max' => 'Field diisi maksimal 100 digit',
                 'jumlah_hari_kerja.required' => 'Field harus diisi',
-                'jumlah_hari_kerja.min' => 'Minimal diisi 2 digit',
-                'jumlah_hari_kerja.max' => 'Field diisi maksimal 3 digit'
+                'jumlah_hari_kerja.min' => 'Minimal diisi 31 digit',
+                'jumlah_hari_kerja.max' => 'Field diisi maksimal 31 hari',
+                'jumlah_hari_kerja.numeric' => 'Field diisi angka'
             ]
         );
     }
@@ -94,6 +95,7 @@ class SetupController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->_validation($request);
         Setup::where('id', $id)->update(['nama_aplikasi' => $request->nama_aplikasi, 'jumlah_hari_kerja' => $request->jumlah_hari_kerja]);
     }
 
