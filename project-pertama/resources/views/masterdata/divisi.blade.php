@@ -32,6 +32,10 @@
                                 <td>{{ $dt->nama }}</td>
                                 <td>
                                     <a href="#" class="badge badge-warning btn-edit" data-id="{{ $dt->id }}" >Edit </a>
+                                    <a href="{{ route('divisi.hapus', $dt->id) }}" class="badge badge-danger"
+                                        onclick="return confirm('Yakin ingin dihapus?')">
+                                        Delete
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

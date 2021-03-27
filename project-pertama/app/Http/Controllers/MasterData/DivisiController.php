@@ -101,10 +101,11 @@ class DivisiController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 
-    public function getUbah()
+    public function hapus($id)
     {
+        Divisi::destroy($id);
+        return redirect()->route('divisi.index')->with('message', 'Divisi telah dihapus');
     }
 }

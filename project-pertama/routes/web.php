@@ -36,8 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', 'otentikasi\OtentikasiController@logout')->name('logout');
 
     Route::resource('/konfigurasi/setup', 'Konfigurasi\SetupController');
-    Route::get('/konfigurasi/setup/getubah', 'Konfigurasi\SetupController@getUbah');
     Route::resource('/master-data/divisi', 'MasterData\DivisiController');
+    Route::get('/master-data/hapus{id}', 'MasterData\DivisiController@hapus')->name('divisi.hapus');
 });
 
 
