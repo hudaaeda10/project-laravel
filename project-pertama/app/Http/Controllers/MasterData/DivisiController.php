@@ -74,10 +74,10 @@ class DivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Setup $setup)
+    public function edit(Divisi $divisi)
     {
         // $setup = Setup::find($id);
-        return view('konfigurasi.setup-edit', compact('setup'));
+        return view('masterdata.divisi-edit', compact('divisi'));
     }
 
     /**
@@ -90,7 +90,7 @@ class DivisiController extends Controller
     public function update(Request $request, $id)
     {
         $this->_validation($request);
-        Setup::where('id', $id)->update(['nama_aplikasi' => $request->nama_aplikasi, 'jumlah_hari_kerja' => $request->jumlah_hari_kerja]);
+        Divisi::where('id', $id)->update(['nama' => $request->nama]);
     }
 
     /**

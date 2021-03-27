@@ -31,7 +31,7 @@
                                 <th scope="row">{{ $no+1 }}</th>
                                 <td>{{ $dt->nama }}</td>
                                 <td>
-                                    <a href="#" class="badge badge-warning btn-edit" dt-id="{{ $dt->id }}" >Edit </a>
+                                    <a href="#" class="badge badge-warning btn-edit" data-id="{{ $dt->id }}" >Edit </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -114,10 +114,9 @@
             $('#exampleModal').modal('show');
         @endif
         $('.btn-edit').on('click',function(){
-            // console.log($(this).data('id'));
             let id = $(this).data('id')
             $.ajax({
-                url: `/konfigurasi/setup/${id}/edit`,
+                url: `/master-data/divisi/${id}/edit`,
                 method: "GET",
                 success: function(data) {
                     // console.log(data);
@@ -131,35 +130,26 @@
         });
 
         $('.btn-update').on('click',function(){
-            // console.log($(this).data('id'));
             let id = $('#form-edit').find('#id_data').val();
             let formData = $('#form-edit').serialize();
             console.log(formData);
-            // console.log(id);
             $.ajax({
-                url: `/konfigurasi/setup/${id}`,
+                url: `/master-data/divisi/${id}`,
                 method: "PATCH",
                 data: formData,
                 success: function(data) {
-                    // console.log(data);
-                    // $('#modal-edit').find('.modal-body').html(data);
                     $('#modal-edit').modal('hide');
-                    window.location.assign('/konfigurasi/setup');
+                    window.location.assign('/master-data/divisi');
                 },
                 error:function(err) {
                     console.log(err.responseJSON);
                     err_log = err.responseJSON.errors;
                     if (err.status == 422) {
-                        if (typeof(err_log.nama_aplikasi) !== 'undefined'){
-                            $('#modal-edit').find('[name="nama_aplikasi"]').prev().html('<span style="color:red"> Nama Aplikasi | '+ err_log.nama_aplikasi[0] +'</span>');
+                        if (typeof(err_log.nama) !== 'undefined'){
+                            $('#modal-edit').find('[name="nama"]').prev().html('<span style="color:red"> Nama Divisi | '+ err_log.nama[0] +'</span>');
                         } else {
-                            $('#modal-edit').find('[name="nama_aplikasi"]').prev().html('<span> Nama Aplikasi </span>');
+                            $('#modal-edit').find('[name="nama"]').prev().html('<span> Nama Divisi </span>');
                         }
-                    }
-                    if (typeof(err_log.jumlah_hari_kerja) !== 'undefined') {
-                        $('#modal-edit').find('[name="jumlah_hari_kerja"]').prev().html('<span style="color:red"> Jumlah Hari Kerja | '+ err_log.jumlah_hari_kerja[0] +'</span>');
-                    }else {
-                        $('#modal-edit').find('[name="jumlah_hari_kerja"]').prev().html('<span> Jumlah Hari Kerja </span>');
                     }
                 }
             });
