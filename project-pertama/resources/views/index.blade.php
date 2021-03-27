@@ -3,10 +3,8 @@
 @section('content')
     <div class="section-body">
         <div class="row">
+            <x-alert type="danger" judul="Informasi"/>
             @include('sweetalert::alert')
-            <div class="col-12 col-md-6 col-lg-6">
-                Blank Page
-            </div>
         </div>
     </div>
 @endsection
