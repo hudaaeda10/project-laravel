@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('/konfigurasi/setup', 'Konfigurasi\SetupController');
     Route::get('/konfigurasi/setup/getubah', 'Konfigurasi\SetupController@getUbah');
+    Route::resource('/master-data/divisi', 'MasterData\DivisiController');
 });
 
 
