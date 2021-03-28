@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('/konfigurasi/setup', 'Konfigurasi\SetupController');
     Route::resource('/master-data/divisi', 'MasterData\DivisiController');
+    Route::resource('/master-data/karyawan', 'MasterData\KaryawanController');
     Route::get('/master-data/hapus{id}', 'MasterData\DivisiController@hapus')->name('divisi.hapus');
 });
 
