@@ -17,4 +17,9 @@ class Karyawan extends Model
     {
         return $this->hasMany('App\Models\Karyawan_keluarga', 'karyawan_id');
     }
+
+    public function karyawan_details()
+    {
+        return $this->hasOne('App\Models\Karyawan_details', 'karyawan_id');
+    }
 }
