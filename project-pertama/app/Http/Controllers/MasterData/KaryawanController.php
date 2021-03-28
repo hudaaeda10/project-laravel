@@ -20,6 +20,13 @@ class KaryawanController extends Controller
         echo 'Nama Karyawan :' . $karyawan->nama_karyawan;
         echo "</br> Jabatan : " . $jabatan->nama_jabatan;
         echo "</br> Gaji Pokok : " . $jabatan->gaji_pokok;
+        echo "</br></br>";
+        echo "List anggota Keluarga";
+        $karyawan = Karyawan::find(1);
+        $keluarga = Karyawan::find(1)->karyawan_keluarga;
+        foreach ($keluarga as $kel) {
+            echo "<br> Nama : " . $kel->nama . " Hubungan : " . $kel->hubungan;
+        }
     }
 
     /**
