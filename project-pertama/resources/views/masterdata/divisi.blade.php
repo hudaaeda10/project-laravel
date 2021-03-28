@@ -5,8 +5,10 @@
         <div class="row">
             @include('sweetalert::alert')
             <div class="col-12 col-md-12 col-lg-12">
+                @can('tambah_divisi', App\Models\Divisi::class)
                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah Data</button>
                 <hr>
+                @endcan
                 @if (session('message'))
                     <div class="alert alert-success alert-dismissible show fade">
                         <div class="alert-body">
@@ -32,10 +34,12 @@
                                 <td>{{ $dt->nama }}</td>
                                 <td>
                                     <a href="#" class="badge badge-warning btn-edit" data-id="{{ $dt->id }}" >Edit </a>
+                                    @can('hapus_divisi', App\Models\Divisi::class)
                                     <a href="{{ route('divisi.hapus', $dt->id) }}" class="badge badge-danger"
                                         onclick="return confirm('Yakin ingin dihapus?')">
                                         Delete
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
