@@ -13,6 +13,11 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserSeeder::class);
         // $this->call(JabatanSeeder::class);
-        factory(App\Jabatan::class, 5)->create();
+        // factory(App\Jabatan::class, 5)->create();
+        // $this->call(LevelUsersSeeder::class);
+        // $this->call(MenuSeeder::class);
+        // $this->call(MenuSeeder::class);
+        // $this->call(UsersSeeder::class);
+        $this->call(AksesSeeder::class);
     }
 }
