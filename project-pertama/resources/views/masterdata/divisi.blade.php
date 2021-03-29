@@ -7,6 +7,7 @@
             <div class="col-12 col-md-12 col-lg-12">
                 @can('tambah_data')
                 <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah Data</button>
+                {{ SiteHelpers::cek_akses() }}
                 <hr>
                 @endcan
                 {{-- @can('tambah_divisi', App\Models\Divisi::class)
