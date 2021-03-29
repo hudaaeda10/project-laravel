@@ -30,13 +30,13 @@
                 </ul>
             </li> --}}
             @foreach (SiteHelpers::main_menu() as $mm)
-            <li class="nav-item dropdown @if (Request::segment(1) == 'master-data') active @endif">
+            <li class="nav-item dropdown @if (Request::segment(1) == $mm->url ) active @endif">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>{{$mm->nama_menu}}</span></a>
                     <ul class="dropdown-menu">
                         @foreach (SiteHelpers::sub_menu() as $sm)
                         @if ($sm->master_menu == $mm->id)
-                            <li><a class="nav-link" href="{{ url($sm->url) }}">{{$sm->nama_menu}}</a></li>
+                            <li @if (Request::segment(1) .'/'. Request::segment(2) == $sm->url)  class="active" @endif><a class="nav-link" href="{{ url($sm->url) }}">{{$sm->nama_menu}}</a></li>
                         @endif
                         @endforeach
                 </ul>
