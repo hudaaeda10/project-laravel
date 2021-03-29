@@ -5,6 +5,8 @@ namespace App\Http\Controllers\MasterData;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class DivisiController extends Controller
 {
@@ -16,6 +18,9 @@ class DivisiController extends Controller
     public function index()
     {
         // $this->authorize('akses_divisi', Divisi::class);
+        if (!Gate::allows('akses')) {
+            return redirect('dashboard');
+        }
         $data = Divisi::get();
         return view('masterdata/divisi', ['data' => $data]);
     }

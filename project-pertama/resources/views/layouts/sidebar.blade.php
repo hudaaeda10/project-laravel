@@ -21,15 +21,17 @@
             <li class="nav-item dropdown @if (Request::segment(1) == 'master-data') active @endif">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Masterdata</span></a>
-                <ul class="dropdown-menu">
-                    <li class="@if (Request::segment(1) == 'master-data' and Request::segment(2) == 'divisi') active @endif"><a class="nav-link" href="{{ route('divisi.index') }}">Master Data</a></li>
+                    <ul class="dropdown-menu">
+                    @can('akses')
+                        <li class="@if (Request::segment(1) == 'master-data' and Request::segment(2) == 'divisi') active @endif"><a class="nav-link" href="{{ route('divisi.index') }}">Master Data</a></li>
+                    @endcan
                     <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                 </ul>
             </li>
             <li class="@if (Request::segment(1) == 'crud' and Request::segment(2) == 'index') active @endif"><a class="nav-link" href="{{ route('crud') }}"><i class="far fa-square"></i>
                     <span>CRUD</span></a></li>
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i>
                     <span>Bootstrap</span></a>
                 <ul class="dropdown-menu">
@@ -54,7 +56,7 @@
                     <li><a class="nav-link" href="bootstrap-tooltip.html">Tooltip</a></li>
                     <li><a class="nav-link" href="bootstrap-typography.html">Typography</a></li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
